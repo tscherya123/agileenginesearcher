@@ -16,10 +16,10 @@ import java.util.List;
 @Service
 public class AgileEnginePhotoServiceImpl implements PhotoService{
 
-    final String uri = "http://interview.agileengine.com";
-    final String authPath = "/auth";
-    final String pagePath = "/images";
-    final String authBody = "{ \"apiKey\": \"23567b218376f79d9415\" }";
+    private final String uri = "http://interview.agileengine.com";
+    private final String authPath = "/auth";
+    private final String pagePath = "/images";
+    private final String authBody = "{ \"apiKey\": \"23567b218376f79d9415\" }";
 
     @Override
     public List<PictureDetail> getAllPicturesDetail() {

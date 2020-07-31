@@ -13,6 +13,6 @@ import javax.persistence.Id;
 @Entity
 public class AuthInfo {
     @Id
-    String token;
-    Boolean auth;
+    private String token;
+    private Boolean auth;
 }
