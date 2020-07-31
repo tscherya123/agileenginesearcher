@@ -1,6 +1,7 @@
-#PHOTO SEARCH TEST TASK FOR AGILE ENGINE
-###DMYTRO CHERNIAIEV
-##Setup and run
+**PHOTO SEARCH TEST TASK FOR AGILE ENGINE BY _DMYTRO CHERNIAIEV_**
+
+Setup and run:
+
 What do you need to run this project:
 * Java 11
 * Maven
