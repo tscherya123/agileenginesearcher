@@ -2,18 +2,27 @@ package com.cherniaev.agileengine.photosearcher.service;
 
 import com.cherniaev.agileengine.photosearcher.entity.PictureDetail;
 import com.cherniaev.agileengine.photosearcher.repository.PictureDetailRepository;
+import org.apache.commons.lang.time.DateUtils;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+@Service
 public class SearchServiceImpl implements SearchService {
 
     private final PhotoService photoService;
     private final PictureDetailRepository pictureDetailRepository;
+    private Date nextCacheUpdateTime;
+    private final Integer cacheUpdateTimeMin;
 
     public SearchServiceImpl(PhotoService photoService, PictureDetailRepository pictureDetailRepository) {
         this.photoService = photoService;
         this.pictureDetailRepository = pictureDetailRepository;
+        nextCacheUpdateTime = new Date();
+        cacheUpdateTimeMin = 20;
     }
 
     @Override
@@ -50,10 +59,11 @@ public class SearchServiceImpl implements SearchService {
     }
 
     private List<PictureDetail> getAllPictures() {
-        if (!pictureDetailRepository.findAll().iterator().hasNext()) {
+        if (nextCacheUpdateTime.before(new Date())) {
             photoService.getAllPicturesDetail().forEach(pictureDetail -> {
                 pictureDetailRepository.save(pictureDetail);
             });
+            nextCacheUpdateTime = DateUtils.addMinutes(new Date(), cacheUpdateTimeMin);
         }
         List<PictureDetail> result = new ArrayList<PictureDetail>();
         pictureDetailRepository.findAll().forEach(result::add);

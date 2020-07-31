@@ -6,13 +6,14 @@ import com.cherniaev.agileengine.photosearcher.entity.Picture;
 import com.cherniaev.agileengine.photosearcher.entity.PictureDetail;
 import com.google.gson.Gson;
 import org.springframework.http.*;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Service
 public class AgileEnginePhotoServiceImpl implements PhotoService{
 
     final String uri = "http://interview.agileengine.com";
